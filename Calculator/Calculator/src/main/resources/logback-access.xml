@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <Properties>
+        <Property name="LOG_DIR">./../../../logs</Property>
+        <Property name="ARCHIVE_DIR">${LOG_DIR}/archive</Property>
+        <Property name="LOG_FILE_PREFIX">spring-boot-logger</Property>
+        <Property name="MAX_SIZE">500 MB</Property>
+        <Property name="PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level|%t|%X{version}|%X{transactionId}|%c{1}|%M|%msg%n
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="file_service"
+                     fileName="${LOG_DIR}/${LOG_FILE_PREFIX}.log"
+                     filePattern="${ARCHIVE_DIR}/${LOG_FILE_PREFIX}.log.%d{yyyy-MM-dd}-%i">
+            <PatternLayout>
+                <pattern>${PATTERN}</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="${MAX_SIZE}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="4"/>
+        </RollingFile>
+    </Appenders>
+
+    <!-- LOG everything at INFO level -->
+    <root level="info">
+        <appender-ref ref="file_service" />
+    </root>
+
+</configuration>
