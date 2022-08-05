@@ -1,6 +1,7 @@
 package ChallengeJava.Calculator;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,8 @@ public class RestController {
     public ResponseEntity<?> Soma(@RequestParam Map<String, String> allParams) throws JsonProcessingException {
 
         headers.clear();
+        MDC.put("requestIdentifier",String.valueOf(requestIdentifier));
+
         headers.add("requestIdentifier",String.valueOf(requestIdentifier++));
 
         return ResponseEntity
@@ -38,7 +41,10 @@ public class RestController {
     public ResponseEntity<?> Substraction(@RequestParam Map<String, String> allParams) throws JsonProcessingException {
 
         headers.clear();
+        MDC.put("requestIdentifier",String.valueOf(requestIdentifier));
+
         headers.add("requestIdentifier",String.valueOf(requestIdentifier++));
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .headers(headers)
@@ -50,6 +56,8 @@ public class RestController {
     @GetMapping(value = "/multiplication")
     public ResponseEntity<?> Multiplication(@RequestParam Map<String, String> allParams) throws JsonProcessingException {
         headers.clear();
+        MDC.put("requestIdentifier",String.valueOf(requestIdentifier));
+
         headers.add("requestIdentifier",String.valueOf(requestIdentifier++));
             return ResponseEntity
                     .status(HttpStatus.OK)
@@ -62,6 +70,8 @@ public class RestController {
     @GetMapping(value = "/division")
     public ResponseEntity<?> Division(@RequestParam Map<String, String> allParams) {
         headers.clear();
+        MDC.put("requestIdentifier",String.valueOf(requestIdentifier));
+
         headers.add("requestIdentifier",String.valueOf(requestIdentifier++));
 
         try {

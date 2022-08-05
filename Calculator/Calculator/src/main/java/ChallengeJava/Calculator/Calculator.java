@@ -3,6 +3,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 //import org.modelmapper.ModelMapper;
 
@@ -18,7 +19,8 @@ public class Calculator {
 
 
     public String Sum(Map<String, String> allParams) throws JsonProcessingException {
-        log.info("New request GET for Sum");
+        log.info("New request GET for Sum. Request identifier: "+ MDC.get("requestIdentifier"));
+
         resultFinal = Double.parseDouble(allParams.get("a")) + Double.parseDouble(allParams.get("b"));
 
         return objectMapper.writeValueAsString(new Result(f.format(resultFinal)));
@@ -26,24 +28,24 @@ public class Calculator {
     }
 
     public String Substraction(Map<String, String> allParams) throws JsonProcessingException {
-        log.info("New request GET for Substraction");
+        log.info("New request GET for Substraction. Request identifier: "+ MDC.get("requestIdentifier"));
         resultFinal = Double.parseDouble(allParams.get("a")) - Double.parseDouble(allParams.get("b"));
 
         return objectMapper.writeValueAsString(new Result(f.format(resultFinal)));
     }
 
     public String Multiplication(Map<String, String> allParams) throws JsonProcessingException {
-        log.info("New request GET for Multiplication");
+        log.info("New request GET for Multiplication. Request identifier: "+ MDC.get("requestIdentifier"));
          resultFinal = Double.parseDouble(allParams.get("a")) * Double.parseDouble(allParams.get("b"));
         return objectMapper.writeValueAsString(new Result(f.format(resultFinal)));
     }
 
     public String Division(Map<String, String> allParams) throws JsonProcessingException {
-        log.info("New request GET for Division");
+        log.info("New request GET for Division. Request identifier: "+ MDC.get("requestIdentifier"));
 
         double b = Double.parseDouble(allParams.get("b"));
         if(b==0)
-            throw new ArithmeticException("Division by zero.");
+            throw new ArithmeticException( objectMapper.writeValueAsString(new Result("Division by zero.")));
 
         resultFinal = Double.parseDouble(allParams.get("a")) / b;
 
