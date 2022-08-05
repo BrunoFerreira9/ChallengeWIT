@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Embora este ficheiro esteja criado, os logs não estão a ser escritos no ficheiro, não tendo conseguido descobrir o porquê, no entanto apresenta na consola -->
 <configuration>
     <Properties>
-        <Property name="LOG_DIR">./../../../logs</Property>
+        <Property name="LOG_DIR">./logs</Property>
         <Property name="ARCHIVE_DIR">${LOG_DIR}/archive</Property>
         <Property name="LOG_FILE_PREFIX">spring-boot-logger</Property>
         <Property name="MAX_SIZE">500 MB</Property>
@@ -29,5 +31,7 @@
     <root level="info">
         <appender-ref ref="file_service" />
     </root>
+
+
 
 </configuration>

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.2</version> <!-- lookup parent from repository -->
+		<version>2.7.2</version> <!-- Ao criar não tinha a versão 2.2.6 disponivel e ao tentar mudar aqui aparecia a vermelho,. Optei então por usar a versão que já trazia do spring initializr -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ChallengeJava</groupId>
